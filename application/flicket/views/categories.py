@@ -30,7 +30,7 @@ def categories(department_id=False):
         flash(gettext('New category {} added.'.format(form.category.data)), category="success")
         return redirect(url_for('flicket_bp.categories', department_id=department_id))
 
-    title = gettext('Categories')
+    title = gettext('Categorias')
 
     return render_template('flicket_categories.html',
                            title=title,

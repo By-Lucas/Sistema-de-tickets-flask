@@ -110,10 +110,10 @@ def login():
         user.get_token()
         db.session.commit()
         if user.email is None or user.email == '':
-            flash(gettext('Please set your email and job title.'), category='danger')
+            flash(gettext('Por favor, defina seu e-mail e cargo.'), category='danger')
             return redirect(url_for('flicket_bp.user_details'))
         else:
-            flash(gettext('You were logged in successfully.'), category='success')
+            flash(gettext('Você foi logado com sucesso.'), category='success')
         return redirect(url_for('flicket_bp.index'))
 
     return render_template('flicket_login.html', title='Log In', form=form)
@@ -125,7 +125,7 @@ def logout():
     g.user.revoke_token()
     db.session.commit()
     logout_user()
-    flash(gettext('You were logged out successfully.'), category='success')
+    flash(gettext('Você foi desconectado com sucesso.'), category='success')
     return redirect(url_for('flicket_bp.index'))
 
 
@@ -144,8 +144,8 @@ def password_reset():
         email = FlicketMail()
         email.password_reset(user, new_password)
 
-        flash(gettext('Password reset. Please check your email for your new password'))
+        flash(gettext('Redefinição de senha. Por favor, verifique seu e-mail para sua nova senha'))
         return redirect(url_for('flicket_bp.login'))
 
-    title = 'Password Reset'
+    title = 'Redefinir senha'
     return render_template('flicket_password_reset.html', form=form, title=title)

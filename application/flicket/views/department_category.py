@@ -57,9 +57,9 @@ def ticket_department_category(ticket_id=False):
 
         db.session.commit()
 
-        flash(gettext('You changed category of ticket: {}'.format(ticket_id)), category='success')
+        flash(gettext('Você alterou a categoria do ticket: {}'.format(ticket_id)), category='success')
         return redirect(url_for('flicket_bp.ticket_view', ticket_id=ticket.id))
 
-    title = gettext('Change Department / Category of Ticket')
+    title = gettext('Mudar Departamento / Categoria de Ticket')
 
     return render_template("flicket_department_category.html", title=title, form=form, ticket=ticket)

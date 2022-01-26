@@ -53,6 +53,6 @@ def change_status(ticket_id, status):
     ticket.last_updated = datetime.datetime.now()
     db.session.commit()
 
-    flash(gettext('Ticket %(value)s closed.', value=str(ticket_id).zfill(5)), category='success')
+    flash(gettext('Ticket %(value)s fechado.', value=str(ticket_id).zfill(5)), category='success')
 
     return redirect(url_for('flicket_bp.tickets'))

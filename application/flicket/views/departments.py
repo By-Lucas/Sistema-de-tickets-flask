@@ -31,7 +31,7 @@ def departments(page=1):
 
     _departments = query.paginate(page, app.config['posts_per_page'])
 
-    title = gettext('Departments')
+    title = gettext('Departamento')
 
     return render_template('flicket_departments.html',
                            title=title,

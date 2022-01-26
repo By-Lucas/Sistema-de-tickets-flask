@@ -85,7 +85,7 @@ def users(page=1):
     users = users.paginate(page, app.config['posts_per_page'])
 
     # noinspection PyUnresolvedReferences
-    return render_template('admin_users.html', title='Users', users=users)
+    return render_template('admin_users.html', title='Usuários', users=users)
 
 
 # add user
@@ -102,10 +102,10 @@ def add_user():
                     job_title=form.job_title.data,
                     locale=form.locale.data,
                     disabled=form.disabled.data)
-        flash(gettext('You have successfully registered new user "{}".'.format(form.username.data)), category='success')
+        flash(gettext('Novo usuário registrado com sucesso "{}".'.format(form.username.data)), category='success')
         return redirect(url_for('admin_bp.users'))
     # noinspection PyUnresolvedReferences
-    return render_template('admin_user.html', title='Add User', form=form)
+    return render_template('admin_user.html', title='Adcionar usuário', form=form)
 
 
 # edit user
@@ -122,7 +122,7 @@ def edit_user():
             if user.username != form.username.data:
                 query = FlicketUser.query.filter_by(username=form.username.data)
                 if query.count() > 0:
-                    flash(gettext('Username already exists'), category='warning')
+                    flash(gettext('O nome de usuário já existe'), category='warning')
                 else:
                     # change the username.
                     user.username = form.username.data
@@ -145,7 +145,7 @@ def edit_user():
                 group_id = FlicketGroup.query.filter_by(id=g).first()
                 group_id.users.append(user)
             db.session.commit()
-            flash(gettext("User {} edited.".format(user.username)), category='success')
+            flash(gettext("Usuario {} editado.".format(user.username)), category='success')
             return redirect(url_for('admin_bp.edit_user', id=_id))
 
         # populate form with form data retrieved from database.
@@ -161,12 +161,12 @@ def edit_user():
             groups.append(g.id)
         form.groups.data = groups
     else:
-        flash(gettext("Could not find user."), category='warning')
+        flash(gettext("Não foi possível encontrar o usuário."), category='warning')
         return redirect(url_for('admin_bp.index'))
 
     # noinspection PyUnresolvedReferences
     return render_template('admin_user.html',
-                           title='Edit User',
+                           title='Editar usuário',
                            admin_edit=True,
                            form=form, user=user)
 
@@ -182,19 +182,19 @@ def delete_user():
 
     # we won't ever delete the flicket_admin user (id = 1)
     if id == '1':
-        flash(gettext('Can\'t delete default flicket_admin user.'), category='warning')
+        flash(gettext('Não é possível excluir o usuário flicket_admin padrão.'), category='warning')
         return redirect(url_for('admin_bp.index'))
 
     if form.validate_on_submit():
         # delete the user.
-        flash(gettext('Deleted user {}s'.format(user_details.username)), category='success')
+        flash(gettext('Usuário deletado {}s'.format(user_details.username)), category='success')
         db.session.delete(user_details)
         db.session.commit()
         return redirect(url_for('admin_bp.users'))
     # populate form with logged in user details
     form.id.data = g.user.id
     # noinspection PyUnresolvedReferences
-    return render_template('admin_delete_user.html', title='Delete user',
+    return render_template('admin_delete_user.html', title='Deletar usuário',
                            user_details=user_details, form=form)
 
 
@@ -211,7 +211,7 @@ def groups():
         )
         db.session.add(add_group)
         db.session.commit()
-        flash(gettext('New group "{}" added.'.format(form.group_name.data)), category='success')
+        flash(gettext('Novo grupo "{}" adicionado.'.format(form.group_name.data)), category='success')
         return redirect(url_for('admin_bp.groups'))
 
     # noinspection PyUnresolvedReferences
@@ -229,23 +229,23 @@ def admin_edit_group():
 
     # if group can't be found in database.
     if not group:
-        flash(gettext('Could not find group {}'.format(group.group_name)), category='warning')
+        flash(gettext('Não foi possível encontrar o grupo {}'.format(group.group_name)), category='warning')
         return redirect(url_for('admin_bp.index'))
 
     # prevent editing of flicket_admin group name as this is hard coded into flicket_admin view permissions.
     if group.group_name == app.config['ADMIN_GROUP_NAME']:
-        flash(gettext('Can\'t edit group {}s.'.format(app.config["ADMIN_GROUP_NAME"])), category='warning')
+        flash(gettext('Não é possível editar o grupo {}s.'.format(app.config["ADMIN_GROUP_NAME"])), category='warning')
         return redirect(url_for('admin_bp.index'))
 
     if form.validate_on_submit():
         group.group_name = form.group_name.data
         db.session.commit()
-        flash(gettext('Group name changed to {}.'.format(group.group_name)), category='success')
+        flash(gettext('Nome do grupo alterado paro {}.'.format(group.group_name)), category='success')
         return redirect(url_for('admin_bp.groups'))
     form.group_name.data = group.group_name
 
     # noinspection PyUnresolvedReferences
-    return render_template('admin_edit_group.html', title='Edit Group', form=form)
+    return render_template('admin_edit_group.html', title='Editar grupo', form=form)
 
 
 # Delete group
@@ -259,7 +259,7 @@ def admin_delete_group():
 
     # we won't ever delete the flicket_admin group (id = 1)
     if id == '1':
-        flash(gettext('Can\'t delete default flicket_admin group.'), category='warning')
+        flash(gettext('Não é possível excluir o grupo flicket_admin padrão.'), category='warning')
         return redirect(url_for('admin_bp.index'))
 
     if form.validate_on_submit():
@@ -270,7 +270,7 @@ def admin_delete_group():
         return redirect(url_for('admin_bp.groups'))
     # populate form with logged in user details
     form.id.data = g.user.id
-    title = gettext('Delete Group')
+    title = gettext('Excluir grupo')
     # noinspection PyUnresolvedReferences
     return render_template('admin_delete_group.html', title=title,
                            group_details=group_details, form=form)

@@ -60,7 +60,7 @@ def config():
             config_details.mail_password = form.mail_password.data
 
         db.session.commit()
-        flash(gettext('Config details updated.'), category='success')
+        flash(gettext('Detalhes de configuração atualizados.'), category='success')
         return redirect(url_for('admin_bp.config'))
 
     # populate form with details from database.
@@ -92,5 +92,5 @@ def config():
     form.change_category_only_admin_or_super_user.data = config_details.change_category_only_admin_or_super_user
 
     return render_template('admin_config.html',
-                           title='Flicket Configuration',
+                           title='Configuração de Flicket',
                            form=form)

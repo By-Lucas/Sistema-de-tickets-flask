@@ -81,4 +81,4 @@ def user_details():
     form.job_title.data = g.user.job_title
     form.locale.data = g.user.locale
 
-    return render_template('flicket_edituser.html', form=form, title='Edit User Details')
+    return render_template('flicket_edituser.html', form=form, title='Editar detalhes do usuário')

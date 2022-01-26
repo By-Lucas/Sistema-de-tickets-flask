@@ -33,7 +33,7 @@ def does_username_exist(form, field):
     """
     result = FlicketUser.query.filter_by(username=form.username.data).count()
     if result > 0:
-        field.errors.append('The user "{}" is already registered.'.format(form.username.data))
+        field.errors.append('The user "{}" já está registrado.'.format(form.username.data))
         return False
 
     return True
@@ -66,7 +66,7 @@ def group_exists(form, field):
     ok = True
     query = FlicketGroup.query.filter_by(group_name=form.group_name.data).count()
     if query != 0:
-        field.errors.append('Group name already exists.')
+        field.errors.append('O nome do grupo já existe.')
         ok = False
     return ok
 
@@ -80,7 +80,7 @@ def check_password(form, field):
     """
     result = FlicketUser.query.filter_by(id=form.id.data).first()
     if bcrypt.hashpw(form.password.data.encode('utf-8'), result.password) != result.password:
-        field.errors.append('Entered password is incorrect.')
+        field.errors.append('A senha inserida está incorreta.')
         return False
     return True
 
@@ -94,7 +94,7 @@ def check_password_formatting(form, field):
     """
     ok = True
     if not any(s.isupper() for s in field.data) and not any(s.islower() for s in field.data):
-        field.errors.append('Password must contain upper and lower characters.')
+        field.errors.append('A senha deve conter caracteres superiores e inferiores.')
         ok = False
 
     return ok
@@ -122,11 +122,11 @@ def check_email(form, field):
     """
     ok = True
     if not check_email_format(field.data):
-        field.errors.append('Please enter a correctly formatted email address.')
+        field.errors.append('Insira um endereço de e-mail formatado corretamente.')
         ok = False
     result = FlicketUser.query.filter_by(email=form.email.data).count()
     if result > 0:
-        field.errors.append('A user with the email {} is already registered.'.format(form.email.data))
+        field.errors.append('Um usuário com o e-mail {} já está registrado.'.format(form.email.data))
         ok = False
 
     return ok

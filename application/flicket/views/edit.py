@@ -47,7 +47,7 @@ def edit_ticket(ticket_id):
         not_authorised = False
 
     if not_authorised:
-        flash(gettext('You are not authorised to edit this ticket.'), category='warning')
+        flash(gettext('Você não está autorizado a editar este ticket.'), category='warning')
         return redirect(url_for('flicket_bp.ticket_view', ticket_id=ticket_id))
 
     if form.validate_on_submit():
@@ -63,7 +63,7 @@ def edit_ticket(ticket_id):
             form_uploads=form.uploads.data
         )
 
-        flash('Ticket successfully edited.', category='success')
+        flash('Ticket editado com sucesso.', category='success')
 
         return redirect(url_for('flicket_bp.ticket_view', ticket_id=ticket_id))
 
@@ -72,7 +72,7 @@ def edit_ticket(ticket_id):
     form.title.data = ticket.title
     form.category.data = ticket.category_id
 
-    title = gettext('Edit Ticket')
+    title = gettext('Editar Ticket')
 
     return render_template('flicket_edittopic.html',
                            title=title,

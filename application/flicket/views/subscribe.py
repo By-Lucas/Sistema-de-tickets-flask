@@ -36,11 +36,11 @@ def subscribe_ticket(ticket_id=None):
             add_action(ticket, 'subscribe', recipient=g.user)
             db.session.add(subscribe)
             db.session.commit()
-            flash(gettext('You have been subscribed to this ticket.'), category='success')
+            flash(gettext('Você foi inscrito neste ticket.'), category='success')
 
         else:
 
-            flash(gettext('Already subscribed to this ticket'), category='warning')
+            flash(gettext('Já subscreveu este ticket'), category='warning')
 
         return redirect(url_for('flicket_bp.ticket_view', ticket_id=ticket_id))
 
@@ -62,10 +62,10 @@ def unsubscribe_ticket(ticket_id=None, user_id=None):
             add_action(ticket, 'unsubscribe', recipient=user)
             db.session.delete(subscription)
             db.session.commit()
-            flash(gettext('"{}" has been unsubscribed from this ticket.'.format(user.name)), category='success')
+            flash(gettext('"{}" foi cancelada a partir deste bilhete.'.format(user.name)), category='success')
 
         else:
 
-            flash(gettext('Could not unsubscribe "{}" from ticket.'.format(user.name)), category='warning')
+            flash(gettext('Não foi possível cancelar a inscrição "{}" do bilhete.'.format(user.name)), category='warning')
 
         return redirect(url_for('flicket_bp.ticket_view', ticket_id=ticket_id))

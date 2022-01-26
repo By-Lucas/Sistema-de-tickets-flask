@@ -36,5 +36,5 @@ def email_test():
             category='warning')
 
     return render_template('admin_email_test.html',
-                           title='Send Email Test',
+                           title='Enviar e-mail de teste',
                            form=form)

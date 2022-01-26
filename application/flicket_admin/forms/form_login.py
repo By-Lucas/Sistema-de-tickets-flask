@@ -23,11 +23,11 @@ def login_user_exist(form, field):
     """
     result = FlicketUser.query.filter_by(username=form.username.data)
     if result.count() == 0:
-        field.errors.append('Invalid username.')
+        field.errors.append('Nome de usuário Inválido.')
         return False
     result = result.first()
     if bcrypt.hashpw(form.password.data.encode('utf-8'), result.password) != result.password:
-        field.errors.append('Invalid password.')
+        field.errors.append('Senha inválida.')
         return False
 
     return True

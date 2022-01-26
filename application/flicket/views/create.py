@@ -38,11 +38,11 @@ def ticket_create():
                                                     hours=form.hours.data,
                                                     files=request.files.getlist("file"))
 
-        flash(gettext('New Ticket created.'), category='success')
+        flash(gettext('Novo ticket criado.'), category='success')
 
         session['ticket_create_last_category'] = form.category.data
 
         return redirect(url_for('flicket_bp.ticket_view', ticket_id=new_ticket.id))
 
-    title = gettext('Create Ticket')
+    title = gettext('Criar tíquete')
     return render_template('flicket_create.html', title=title, form=form)

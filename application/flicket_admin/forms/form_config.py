@@ -22,7 +22,7 @@ def check_email_formatting(form, field):
     """
     ok = True
     if not check_email_format(form.email_address.data):
-        field.errors.append('Please enter a correctly formatted email address.')
+        field.errors.append('Insira um endereço de e-mail formatado corretamente.')
         ok = False
 
     return ok

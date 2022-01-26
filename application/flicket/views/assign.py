@@ -69,6 +69,6 @@ def ticket_assign(ticket_id=False):
         flash(gettext('You reassigned ticket: {} to {}'.format(ticket.id, user.name)), category='success')
         return redirect(url_for('flicket_bp.ticket_view', ticket_id=ticket.id))
 
-    title = gettext('Assign Ticket')
+    title = gettext('Atribuir Bilhete')
 
     return render_template("flicket_assign.html", title=title, form=form, ticket=ticket)

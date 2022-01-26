@@ -80,9 +80,9 @@ def tickets_view(page, is_my_view=False, subscribed=False):
 
     ticket_query = ticket_query.paginate(page, app.config['posts_per_page'])
 
-    title = gettext('Tickets')
+    title = gettext('Ingressos')
     if is_my_view:
-        title = gettext('My Tickets')
+        title = gettext('Meus Ingressos')
 
     if content:
         form.content.data = content

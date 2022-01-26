@@ -26,7 +26,7 @@ from . import flicket_bp
 def delete_ticket(ticket_id):
     # check is user is authorised to delete tickets. Currently, only admins can delete tickets.
     if not g.user.is_admin:
-        flash(gettext('You are not authorised to delete tickets.'), category='warning')
+        flash(gettext('Você não está autorizado a excluir tickets.'), category='warning')
         return redirect(url_for('flicket_bp.ticket_view', ticket_id=ticket_id))
 
     form = ConfirmPassword()
@@ -58,13 +58,13 @@ def delete_ticket(ticket_id):
 
         # commit changes
         db.session.commit()
-        flash(gettext('Ticket deleted.'), category='success')
+        flash(gettext('Ticket excluido.'), category='success')
         return redirect(url_for('flicket_bp.tickets'))
 
     return render_template('flicket_deletetopic.html',
                            form=form,
                            ticket=ticket,
-                           title='Delete Ticket')
+                           title='Excluir Ticket')
 
 
 # delete post
