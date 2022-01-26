@@ -4,6 +4,8 @@
 from flask_script import Manager, Server
 from flask_migrate import Migrate, MigrateCommand
 
+from collections import deque
+
 from setup import RunSetUP
 from application import app, db
 from scripts.email_batch_notifications import EmailOutStandingTickets

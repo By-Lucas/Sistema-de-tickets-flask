@@ -13,6 +13,7 @@ from scripts.create_json import check_db_connection
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
+
 class BaseConfiguration(object):
 
     WriteConfigJson.json_exists()
